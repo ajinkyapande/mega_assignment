@@ -5,13 +5,13 @@
    ```commandline
      pip install -r requirements.txt
     ```
-3. Go to test dir 
-   ```commandline
-    cd tests
-    pytest -s 
-   ```
-   After running the first testcase a report will be generated. 
-  ![Sample report](report/upload_download_perf_report.png)
+   3. Go to test dir 
+      ```commandline
+       cd tests
+       pytest -s 
+      ```
+      After running the first testcase a report will be generated like this. 
+     ![Sample report](report/upload_download_perf_report.png)
 
 # Dir structure. 
    pytest framework is used to achieve the same.
@@ -39,3 +39,4 @@
 
       Go to page https://mega.nz/desktop, select Linux platform, 
       write a script to verify the download links for MEGA Desktop App are working for all linux distributions.
+

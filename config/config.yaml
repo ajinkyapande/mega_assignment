@@ -1,6 +1,6 @@
 aws:
-    AWS_ACCESS_KEY: AKIA5FTZFQBG5UP4IYFC
-    AWS_SECRET_KEY : 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
+    AWS_ACCESS_KEY: <access_key>
+    AWS_SECRET_KEY : <secret_key>
 
 
 ui:
