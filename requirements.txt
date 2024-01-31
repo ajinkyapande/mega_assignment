@@ -1,2 +1,8 @@
-boto3
+pytest
+allure-pytest
+pyyaml
+pytest-html
 requests
+pytest-bdd
+boto3
+selenium

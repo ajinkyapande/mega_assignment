@@ -1,32 +1,38 @@
-import boto3
+import pytest
+import logging
 import time
 import os
-import matplotlib.pyplot as plt
-from mega_assignment.helper.aws_helpers import AWSHelper
-import logging
 
 # Create a logger
 logger = logging.getLogger('my_logger')
 
 
-class Test_AWS_S3:
-
-    def __init__(self):
-        self.s3_helper = AWSHelper()
+class TestS3:
 
 
-    def test_aws_s3(self):
+    @pytest.mark.aws_s3
+    @pytest.mark.parametrize("bucket_name, text_file", [(f'test-bucket-name-{int(time.time())}', f'test_{int(time.time())}.txt')])
+    def test_aws_s3(self, aws, bucket_name, text_file):
         """
 
         :return:
         """
-        logger.info("1. Create a aws s3 bucket")
-        self.s3_helper.create_bucket()
-        logger.info("2. Upload a text file")
-        self.s3_helper.upload_file()
-        logger.info("3. Download the text file")
-        self.s3_helper.download_file()
-        logger.info("4. Delete the text file")
-        self.s3_helper.delete_file()
-        logger.info("5. Prepare a report for file upload performance, data visulization methods are preferred")
-        self.s3_helper.generate_performance_report()
+        logger.info("1. Create new aws s3 bucket")
+        aws.create_bucket(bucket_name)
+
+        logger.info("Create new text file with sample content ")
+        with open(text_file, 'w') as fp:
+            fp.write('This is sample')
+
+
+        try:
+            logger.info("2. Upload a text file")
+            aws.upload_file(bucket_name, text_file)
+            logger.info("3. Download the text file")
+            aws.download_file(bucket_name, text_file)
+            logger.info("4. Delete the text file")
+            aws.delete_file(bucket_name, text_file)
+            logger.info("5. Prepare a report for file upload performance, data visulization methods are preferred")
+            aws.generate_performance_report()
+        finally:
+            os.remove(text_file)

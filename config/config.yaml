@@ -1,0 +1,8 @@
+aws:
+    AWS_ACCESS_KEY: AKIA5FTZFQBG5UP4IYFC
+    AWS_SECRET_KEY : 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
+
+
+ui:
+    url: 'https://mega.io/desktop'
+    driver_path: '~/Downloads/chromedriver_mac64/chromedriver'
