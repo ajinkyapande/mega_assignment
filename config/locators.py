@@ -8,3 +8,7 @@ drop_down_selector = "//div[@class='selector']"
 drop_down_options = "//div[contains(@class, 'option active')]"
 
 data_value_locator = "//div[@data-value="
+
+download_button_locator = "//div[@data-os-id='{}']/div[@class='download-buttons']//*[contains(text(),'Download')]"
+
+os_flevour_locator = "//*[contains(@class,'options-list')]/div"

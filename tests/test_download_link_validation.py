@@ -19,22 +19,21 @@ class TestDownloadLinks:
         driver.get_element(linux_download_button).click()
 
         invalid_download_links = []
-        time.sleep(5)
-        linux_os_versions = driver.browser.find_elements(By.XPATH, drop_down_options)
+        time.sleep(5)     # TODO Remove this hardcoded timeout.
+        linux_os_versions = driver.browser.find_elements(By.XPATH, os_flevour_locator)
         for os_download_element in linux_os_versions:
             driver.get_element(drop_down_selector).click()
-            os_flevour_val = os_download_element.get_attribute('data-value')
-            print(f'Getting download link for {os_flevour_val}')
+            os_flevor_val = os_download_element.get_attribute('data-value')
+            print(f'Getting download link for {os_flevor_val}')
             time.sleep(10)
             actions = ActionChains(driver.browser)
-            actions.move_to_element(driver.get_element(f"{data_value_locator}'{os_flevour_val}']")).perform()
+            actions.move_to_element(driver.get_element(f"{data_value_locator}'{os_flevor_val}']")).perform()
 
-            driver.get_element(f"{data_value_locator}'{os_flevour_val}']").click()
-            elements = driver.browser.find_elements(By.XPATH, f"//div[@class='product-card {os_flevour_val} desktop']//div[@class='download-buttons']//*[contains(text(),'Download')]")
-
+            driver.get_element(f"{data_value_locator}'{os_flevor_val}']").click()
+            elements = driver.browser.find_elements(By.XPATH, download_button_locator.format(os_flevor_val))
             for element in elements:
                 download_link = element.get_attribute('href')
-                print(f'Validating download link for {os_flevour_val} - {download_link}')
+                print(f'Validating download link for {os_flevor_val} - {download_link}')
                 response = requests.get(download_link)
                 if response.status_code != 200:
                     print('Failed to validation download link for{os_flevor_val} - {download_link}')
